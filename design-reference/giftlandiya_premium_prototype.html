@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giftlandiya — Perfect gifts. Beautiful spaces. Meaningful moments.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAFA;
+    --card:#FFFFFF;
+    --text:#111827;
+    --text-soft:#6B7280;
+    --text-faint:#9CA3AF;
+    --line:#E9E9EC;
+    --primary:#6D28D9;
+    --primary-2:#8B5CF6;
+    --accent:#F59E0B;
+    --accent-ink:#1C0A00;
+    --r-lg:24px;
+    --r-md:18px;
+    --r-sm:12px;
+  }
+  html.dark{
+    --bg:#09090B;
+    --card:#111827;
+    --text:#FAFAFA;
+    --text-soft:#A1A1AA;
+    --text-faint:#71717A;
+    --line:#1F1F23;
+    --primary:#8B5CF6;
+    --primary-2:#A78BFA;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Geist',system-ui,-apple-system,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.5;
+    transition:background .35s ease,color .35s ease;
+    overflow-x:hidden;
+  }
+  img,svg{display:block}
+  a{text-decoration:none;color:inherit}
+  button{font-family:inherit;cursor:pointer;border:none;background:none}
+  .container{width:100%;max-width:1280px;margin:0 auto;padding:0 20px}
+  .pill{border-radius:100px}
+
+  /* ============ scroll reveal ============ */
+  [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+  [data-reveal].in-view{opacity:1;transform:translateY(0)}
+  [data-reveal="stagger"]>*{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+  [data-reveal="stagger"].in-view>*{opacity:1;transform:translateY(0)}
+  [data-reveal="stagger"].in-view>*:nth-child(1){transition-delay:.04s}
+  [data-reveal="stagger"].in-view>*:nth-child(2){transition-delay:.11s}
+  [data-reveal="stagger"].in-view>*:nth-child(3){transition-delay:.18s}
+  [data-reveal="stagger"].in-view>*:nth-child(4){transition-delay:.25s}
+  [data-reveal="stagger"].in-view>*:nth-child(5){transition-delay:.32s}
+  [data-reveal="stagger"].in-view>*:nth-child(6){transition-delay:.39s}
+
+  /* ============ HEADER ============ */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:color-mix(in srgb, var(--bg) 78%, transparent);
+    backdrop-filter:blur(18px) saturate(160%);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex;align-items:center;gap:14px;padding:14px 0}
+  .logo{display:flex;align-items:center;gap:7px;font-weight:700;font-size:17px;color:var(--primary);flex-shrink:0;letter-spacing:-.01em}
+  .logo svg{width:20px;height:20px}
+  .search-wrap{display:none;flex:1;position:relative;max-width:480px}
+  .search-wrap input{
+    width:100%;padding:11px 16px 11px 40px;border-radius:100px;border:1px solid var(--line);
+    background:var(--card);color:var(--text);font-family:inherit;font-size:13.5px;outline:none;
+    transition:border-color .2s,box-shadow .2s;
+  }
+  .search-wrap input:focus{border-color:var(--primary);box-shadow:0 0 0 3px color-mix(in srgb, var(--primary) 16%, transparent)}
+  .search-wrap input::placeholder{color:var(--text-faint)}
+  .search-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--text-faint)}
+  .nav-actions{display:flex;align-items:center;gap:6px;margin-left:auto}
+  .icon-btn{
+    position:relative;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;
+    justify-content:center;color:var(--text);transition:.2s;
+  }
+  .icon-btn:hover{background:color-mix(in srgb, var(--primary) 10%, transparent);color:var(--primary)}
+  .icon-btn svg{width:19px;height:19px}
+  .cart-dot{position:absolute;top:5px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  .mobile-search-btn{display:flex}
+  @media(min-width:768px){
+    .search-wrap{display:flex}
+    .mobile-search-btn{display:none}
+  }
+
+  /* ============ HERO ============ */
+  .hero{padding:48px 0 56px;position:relative;overflow:hidden}
+  .hero-grid{display:flex;flex-direction:column;gap:40px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--primary);margin-bottom:18px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--primary)}
+  .hero h1{font-size:34px;font-weight:700;line-height:1.12;letter-spacing:-.02em;margin-bottom:16px}
+  .hero h1 span{display:block}
+  .hero .lead{font-size:15.5px;color:var(--text-soft);max-width:420px;line-height:1.6;margin-bottom:28px}
+  .cta-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .btn{
+    font-weight:600;font-size:14px;padding:14px 26px;border-radius:100px;display:inline-flex;
+    align-items:center;gap:8px;transition:.25s;
+  }
+  .btn svg{width:16px;height:16px}
+  .btn-primary{background:var(--primary);color:#fff;box-shadow:0 10px 28px -10px color-mix(in srgb, var(--primary) 60%, transparent)}
+  .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.07)}
+  .btn-ghost{border:1.5px solid var(--line);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--primary);color:var(--primary)}
+  .hero-visual{position:relative;width:100%}
+  .hero-photo{
+    aspect-ratio:5/4;border-radius:var(--r-lg);overflow:hidden;position:relative;
+    background:linear-gradient(150deg,#1E1531 0%,#6D28D9 55%,#C4B5FD 100%);
+  }
+  .hero-photo::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 75% 18%,rgba(255,255,255,.22),transparent 55%)}
+  .hero-photo .tag{position:absolute;bottom:18px;left:18px;color:#fff;font-size:12px;opacity:.85;letter-spacing:.02em}
+  .float-card{
+    position:absolute;background:color-mix(in srgb, #fff 14%, transparent);
+    backdrop-filter:blur(18px) saturate(170%);-webkit-backdrop-filter:blur(18px) saturate(170%);
+    border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:12px 16px;display:flex;
+    align-items:center;gap:10px;box-shadow:0 16px 36px -16px rgba(0,0,0,.4);color:#fff;
+  }
+  .fc-1{bottom:-16px;left:14px}
+  .fc-1 .ring{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .fc-1 .ring svg{width:15px;height:15px}
+  .fc-1 b{font-size:13px;display:block}
+  .fc-1 span{font-size:10.5px;opacity:.75}
+  @media(min-width:1024px){
+    .hero{padding:72px 0 90px}
+    .hero-grid{flex-direction:row;align-items:center;gap:64px}
+    .hero-grid>div:first-child{flex:1.1}
+    .hero h1{font-size:52px}
+    .hero .lead{font-size:17px}
+    .hero-visual{flex:1}
+  }
+
+  /* ============ SECTION SHELL ============ */
+  .section{padding:48px 0}
+  @media(min-width:1024px){.section{padding:78px 0}}
+  .section-head{display:flex;flex-direction:column;gap:6px;margin-bottom:28px}
+  .section-head h2{font-size:24px;font-weight:700;letter-spacing:-.01em}
+  .section-head p{font-size:13.5px;color:var(--text-soft)}
+  @media(min-width:768px){
+    .section-head{flex-direction:row;align-items:baseline;justify-content:space-between}
+    .section-head h2{font-size:28px}
+  }
+  .section-link{font-size:13px;font-weight:600;color:var(--primary);display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+
+  /* ============ AI FINDER ============ */
+  .finder{
+    background:linear-gradient(165deg, color-mix(in srgb, var(--primary) 7%, var(--card)), var(--card));
+    border:1px solid var(--line);border-radius:var(--r-lg);padding:36px 22px;text-align:center;
+  }
+  .finder h2{font-size:23px;font-weight:700;margin-bottom:8px}
+  .finder p{font-size:13.5px;color:var(--text-soft);margin-bottom:24px}
+  .chip-row{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-bottom:18px}
+  .chip{
+    border:1.5px solid var(--line);background:var(--card);color:var(--text);
+    padding:10px 18px;border-radius:100px;font-size:13px;font-weight:500;transition:.2s;
+  }
+  .chip:hover{border-color:var(--primary);color:var(--primary)}
+  .chip.active{background:var(--primary);border-color:var(--primary);color:#fff;transform:scale(1.04)}
+  .finder-result{font-size:12px;color:var(--primary);font-weight:600;height:16px;opacity:0;transition:.25s}
+  .finder-result.show{opacity:1}
+  @media(min-width:768px){.finder{padding:52px 48px}}
+
+  /* ============ BENTO ============ */
+  .bento{display:grid;grid-template-columns:1fr;gap:14px}
+  .b-cell{border-radius:var(--r-md);padding:24px;position:relative;overflow:hidden;transition:transform .3s ease}
+  .b-cell:hover{transform:translateY(-3px)}
+  .b-feature{background:linear-gradient(150deg,#1A1428,var(--primary));color:#fff}
+  .b-feature .b-icon{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .b-feature .b-icon svg{width:19px;height:19px}
+  .b-feature h3{font-size:19px;font-weight:700;margin-bottom:6px}
+  .b-feature p{font-size:12.5px;opacity:.78;line-height:1.6}
+  .b-box{background:var(--card);border:1px solid var(--line)}
+  .b-box .row{display:flex;align-items:center;gap:12px}
+  .b-icon-sm{width:32px;height:32px;border-radius:9px;background:color-mix(in srgb, var(--primary) 12%, transparent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .b-icon-sm svg{width:16px;height:16px;color:var(--primary)}
+  .b-box h4{font-size:14px;font-weight:600}
+  .b-box p{font-size:11.5px;color:var(--text-soft);margin-top:2px}
+  .b-stat{background:var(--card);border:1px solid var(--line);text-align:center;padding:22px}
+  .b-stat b{font-size:24px;font-weight:700;display:block;color:var(--primary)}
+  .b-stat span{font-size:11px;color:var(--text-soft)}
+  @media(min-width:768px){
+    .bento{grid-template-columns:repeat(4,1fr);grid-auto-rows:110px}
+    .b-feature{grid-column:span 2;grid-row:span 3;display:flex;flex-direction:column;justify-content:flex-end}
+    .b-box{grid-column:span 2;grid-row:span 1}
+    .b-stat{grid-column:span 1;grid-row:span 1}
+  }
+
+  /* ============ MASONRY ============ */
+  .masonry{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .m-card{
+    border-radius:var(--r-md);position:relative;overflow:hidden;display:flex;align-items:flex-end;
+    padding:14px;transition:transform .3s ease;min-height:140px;
+  }
+  .m-card:hover{transform:translateY(-3px)}
+  .m-card::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 55%)}
+  .m-card span{color:#fff;font-size:13px;font-weight:600;position:relative;z-index:1;line-height:1.3}
+  .m1{background:linear-gradient(150deg,#D6336C,#F783AC)}
+  .m2{background:linear-gradient(150deg,#5F3DC4,#9775FA)}
+  .m3{background:linear-gradient(150deg,#0CA678,#63E6BE)}
+  .m4{background:linear-gradient(150deg,#E8590C,#FFA94D)}
+  .m5{background:linear-gradient(150deg,#1864AB,#74C0FC)}
+  .m6{background:linear-gradient(150deg,#862E9C,#DA77F2)}
+  @media(min-width:768px){
+    .masonry{grid-template-columns:repeat(4,1fr);grid-auto-rows:18px}
+    .m1{grid-row:span 16;grid-column:span 2}
+    .m2{grid-row:span 11}
+    .m3{grid-row:span 13}
+    .m4{grid-row:span 10}
+    .m5{grid-row:span 12;grid-column:span 2}
+    .m6{grid-row:span 11}
+  }
+
+  /* ============ COLLECTIONS ============ */
+  .collections{display:grid;grid-template-columns:1fr;gap:14px}
+  .coll-card{
+    border-radius:var(--r-lg);min-height:260px;position:relative;overflow:hidden;display:flex;
+    flex-direction:column;justify-content:flex-end;padding:26px;transition:.3s;
+  }
+  .coll-card:hover{transform:scale(1.008)}
+  .coll-card::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.62),transparent 58%)}
+  .coll-1{background:linear-gradient(160deg,#7C2D12,#F08C3A)}
+  .coll-2{background:linear-gradient(160deg,#1E3A5F,#5B8DB8)}
+  .coll-3{background:linear-gradient(160deg,#3D2645,#6D28D9)}
+  .coll-card h3{position:relative;z-index:1;color:#fff;font-size:20px;font-weight:700;line-height:1.25;margin-bottom:8px;max-width:240px}
+  .coll-card a{position:relative;z-index:1;color:#fff;font-size:12.5px;font-weight:600;opacity:.92}
+  @media(min-width:1024px){
+    .collections{grid-template-columns:1.2fr 1fr 1fr}
+    .coll-card{min-height:360px;padding:32px}
+    .coll-card h3{font-size:23px}
+  }
+
+  /* ============ PRODUCTS ============ */
+  .product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .p-card{cursor:pointer}
+  .p-photo{aspect-ratio:1;border-radius:var(--r-md);position:relative;overflow:hidden;margin-bottom:11px;transition:transform .25s ease}
+  .p1{background:linear-gradient(155deg,#2A1F3D,#6D28D9 80%)}
+  .p2{background:linear-gradient(155deg,#3D2E1A,#D97706 80%)}
+  .p3{background:linear-gradient(155deg,#1E2A1F,#2F9E44 80%)}
+  .p4{background:linear-gradient(155deg,#3A1F2E,#D6336C 80%)}
+  .p-badge{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.94);color:#111;font-size:10px;font-weight:600;padding:4px 9px;border-radius:100px}
+  .p-cart{
+    position:absolute;bottom:10px;right:10px;width:34px;height:34px;border-radius:50%;background:#fff;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px -4px rgba(0,0,0,.25);
+    transition:.2s;opacity:0;transform:translateY(6px);
+  }
+  .p-card:hover .p-cart{opacity:1;transform:translateY(0)}
+  .p-card:hover .p-photo{transform:translateY(-2px)}
+  .p-cart svg{width:15px;height:15px;color:var(--primary)}
+  .p-name{font-size:13.5px;font-weight:500;margin-bottom:4px}
+  .p-price{font-size:14.5px;font-weight:700}
+  .p-price span{font-size:11px;font-weight:400;color:var(--text-faint);margin-left:4px}
+  .p-rating{font-size:11px;color:var(--text-faint);margin-top:3px}
+  .p-addbtn{
+    margin-top:10px;width:100%;background:var(--text);color:var(--bg);font-size:12px;font-weight:600;
+    padding:9px;border-radius:10px;transition:.2s;
+  }
+  html.dark .p-addbtn{background:var(--primary);color:#fff}
+  .p-addbtn:hover{background:var(--primary);color:#fff}
+  @media(min-width:768px){.product-grid{grid-template-columns:repeat(4,1fr)}}
+
+  /* ============ GIFT BOX BUILDER ============ */
+  .builder{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px 20px}
+  .timeline{display:flex;flex-direction:column;gap:0;margin-bottom:28px}
+  .t-step{display:flex;gap:14px;cursor:pointer;padding:10px 0}
+  .t-node-wrap{display:flex;flex-direction:column;align-items:center}
+  .t-node{
+    width:34px;height:34px;border-radius:50%;border:2px solid var(--line);background:var(--bg);
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;
+    color:var(--text-faint);transition:.25s;flex-shrink:0;
+  }
+  .t-line{width:2px;flex:1;background:var(--line);margin:2px 0;min-height:18px;transition:.3s}
+  .t-step.active .t-node{background:var(--primary);border-color:var(--primary);color:#fff}
+  .t-step.done .t-node{background:color-mix(in srgb, var(--primary) 18%, transparent);border-color:var(--primary);color:var(--primary)}
+  .t-step.done .t-line,.t-step.active ~ .t-step .t-line{background:var(--line)}
+  .t-step.done .t-line{background:var(--primary)}
+  .t-content h4{font-size:14.5px;font-weight:600;margin-top:4px;transition:.2s}
+  .t-content p{font-size:12px;color:var(--text-soft);margin-top:3px;max-height:0;opacity:0;overflow:hidden;transition:.3s}
+  .t-step.active .t-content p{max-height:60px;opacity:1;margin-bottom:4px}
+  .t-step.active .t-content h4{color:var(--primary)}
+  .builder-visual{aspect-ratio:16/9;border-radius:var(--r-md);background:linear-gradient(150deg,#1A1428,var(--primary));position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .builder-visual span{color:#fff;font-size:13px;opacity:.85;text-align:center;padding:0 20px}
+  @media(min-width:1024px){
+    .builder{padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+    .timeline{margin-bottom:0}
+  }
+
+  /* ============ TESTIMONIALS ============ */
+  .testi-grid{display:grid;grid-template-columns:1fr;gap:16px}
+  .testi-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:26px}
+  .testi-stars{color:var(--accent);font-size:13px;margin-bottom:14px;letter-spacing:2px}
+  .testi-card p.quote{font-size:14.5px;line-height:1.65;margin-bottom:18px;color:var(--text)}
+  .testi-who{display:flex;align-items:center;gap:10px}
+  .testi-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(150deg,var(--primary),var(--primary-2));flex-shrink:0}
+  .testi-who b{font-size:13px;display:block}
+  .testi-who span{font-size:11.5px;color:var(--text-soft)}
+  @media(min-width:1024px){.testi-grid{grid-template-columns:repeat(3,1fr)}}
+
+  /* ============ STATEMENT ============ */
+  .statement{background:#0B0B0E;color:#fff;padding:64px 20px;text-align:center;border-radius:var(--r-lg);margin:0 auto}
+  .statement h2{font-size:24px;font-weight:600;letter-spacing:-.01em;line-height:1.4;max-width:680px;margin:0 auto}
+  .statement .accent{color:var(--accent);font-style:italic}
+  .statement .accent2{color:#A78BFA}
+  @media(min-width:768px){.statement{padding:90px 48px}.statement h2{font-size:32px}}
+
+  /* ============ TRUST ============ */
+  .trust{display:flex;flex-wrap:wrap;justify-content:center;gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0}
+  .trust-item{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-soft);padding:6px 18px}
+  .trust-item svg{width:16px;height:16px;color:var(--primary);flex-shrink:0}
+
+  /* ============ FOOTER ============ */
+  footer{background:#0B0B0E;color:#A1A1AA;padding:48px 0 24px;margin-top:8px}
+  .footer-grid{display:grid;grid-template-columns:1fr;gap:32px}
+  .footer-grid .logo{color:#fff;margin-bottom:10px}
+  .footer-grid p.desc{font-size:12.5px;line-height:1.7;max-width:280px;color:#71717A}
+  .footer-col h4{color:#fff;font-size:12.5px;font-weight:600;margin-bottom:13px}
+  .footer-col a{display:block;font-size:12.5px;color:#A1A1AA;margin-bottom:9px;transition:.2s}
+  .footer-col a:hover{color:#fff}
+  .footer-bottom{margin-top:36px;padding-top:20px;border-top:1px solid #1F1F23;display:flex;flex-direction:column;gap:8px;font-size:11.5px;color:#52525B}
+  @media(min-width:768px){
+    .footer-grid{grid-template-columns:1.6fr 1fr 1fr 1fr}
+    .footer-bottom{flex-direction:row;justify-content:space-between}
+  }
+
+  /* ============ TILT helper ============ */
+  .tilt{transition:transform .15s ease}
+  .meta-banner{background:#111827;color:#fff;text-align:center;font-size:11.5px;padding:9px 14px}
+  .meta-banner b{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<div class="meta-banner">Concept prototype for Giftlandiya. <b>Placeholder gradients stand in for real product photography.</b></div>
+
+<header>
+  <div class="container nav-row">
+    <a class="logo" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7c-1.5-4-6-4-6 0s4.5 4 6 0zM12 7c1.5-4 6-4 6 0s-4.5 4-6 0z"/></svg>
+      Giftlandiya
+    </a>
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" placeholder="Search for the perfect gift, idea or inspiration...">
+    </div>
+    <div class="nav-actions">
+      <button class="icon-btn mobile-search-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
+      <button class="icon-btn" id="themeToggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.4 5.4 0 0 1 12 3z"/></svg>
+      </button>
+      <button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
+      <button class="icon-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        <span class="cart-dot"></span>
+      </button>
+      <button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span>Giftlandiya · 2026 Collection</div>
+      <h1>
+        <span>Perfect gifts.</span>
+        <span>Beautiful spaces.</span>
+        <span>Meaningful moments.</span>
+      </h1>
+      <p class="lead">Discover unique decor, unforgettable gifts and curated inspiration — chosen for the people you love.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#finder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5z"/></svg>
+          AI Gift Finder
+        </a>
+        <a class="btn btn-ghost" href="#collections">Explore Collections</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-photo tilt">
+        <div class="tag">N° 014 · Living room edit</div>
+      </div>
+      <div class="float-card fc-1">
+        <div class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div><b>50,000+</b><span>happy customers</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="finder">
+  <div class="container" data-reveal>
+    <div class="finder">
+      <h2>Who are you shopping for?</h2>
+      <p>Answer a couple of questions — we'll find the perfect match</p>
+      <div class="chip-row" id="chips">
+        <button class="chip">Girlfriend</button>
+        <button class="chip">Boyfriend</button>
+        <button class="chip">Mother</button>
+        <button class="chip">Father</button>
+        <button class="chip">Friend</button>
+        <button class="chip">Teacher</button>
+      </div>
+      <div class="finder-result" id="finderResult">Great choice! Let's narrow it down by budget next →</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div>
+        <h2>Why Giftlandiya</h2>
+        <p>Not just another marketplace — a gift-finding experience</p>
+      </div>
+    </div>
+    <div class="bento" data-reveal="stagger">
+      <div class="b-cell b-feature">
+        <div class="b-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5z"/><path d="M19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8z"/></svg></div>
+        <h3>AI thinks it through for you</h3>
+        <p>Answer a few questions — our AI matches you with 12 ideal gifts in under 30 seconds.</p>
+      </div>
+      <div class="b-cell b-box">
+        <div class="row">
+          <div class="b-icon-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+          <div><h4>Build your own gift box</h4><p>Pick products, write a note, preview, and order</p></div>
+        </div>
+      </div>
+      <div class="b-stat"><b>30s</b><span>AI response time</span></div>
+      <div class="b-stat"><b>4.9★</b><span>average rating</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div>
+        <h2>Get inspired</h2>
+        <p>See how others are styling spaces and choosing gifts</p>
+      </div>
+      <a class="section-link" href="#">View all →</a>
+    </div>
+    <div class="masonry" data-reveal="stagger">
+      <div class="m-card m1"><span>Romantic Room Ideas</span></div>
+      <div class="m-card m2"><span>Cozy Bedroom Inspiration</span></div>
+      <div class="m-card m3"><span>Birthday Surprise Ideas</span></div>
+      <div class="m-card m4"><span>Modern Decor Trends</span></div>
+      <div class="m-card m5"><span>Luxury Gift Ideas</span></div>
+      <div class="m-card m6"><span>Aesthetic Workspace Setup</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="collections">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div>
+        <h2>Gift Collections</h2>
+        <p>Each collection is built around a feeling, not just a category</p>
+      </div>
+    </div>
+    <div class="collections" data-reveal="stagger">
+      <div class="coll-card coll-1"><h3>For Someone You Love</h3><a href="#">Shop the collection →</a></div>
+      <div class="coll-card coll-2"><h3>Transform Your Room</h3><a href="#">Shop the collection →</a></div>
+      <div class="coll-card coll-3"><h3>Make Their Birthday Unforgettable</h3><a href="#">Shop the collection →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div>
+        <h2>Featured Products</h2>
+        <p>Loved by thousands of customers</p>
+      </div>
+      <a class="section-link" href="#">View all →</a>
+    </div>
+    <div class="product-grid" data-reveal="stagger">
+      <div class="p-card">
+        <div class="p-photo p1 tilt">
+          <span class="p-badge">New</span>
+          <span class="p-cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></span>
+        </div>
+        <div class="p-name">Jellyfish LED Lamp</div>
+        <div class="p-price">$48<span>USD</span></div>
+        <div class="p-rating">★ 4.9 · 127 reviews</div>
+        <button class="p-addbtn">Add to Cart</button>
+      </div>
+      <div class="p-card">
+        <div class="p-photo p2 tilt">
+          <span class="p-cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></span>
+        </div>
+        <div class="p-name">Aromatic Candle Set</div>
+        <div class="p-price">$19<span>USD</span></div>
+        <div class="p-rating">★ 4.7 · 84 reviews</div>
+        <button class="p-addbtn">Add to Cart</button>
+      </div>
+      <div class="p-card">
+        <div class="p-photo p3 tilt">
+          <span class="p-badge">-15%</span>
+          <span class="p-cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></span>
+        </div>
+        <div class="p-name">Premium Gift Box</div>
+        <div class="p-price">$62<span>USD</span></div>
+        <div class="p-rating">★ 5.0 · 12 reviews</div>
+        <button class="p-addbtn">Add to Cart</button>
+      </div>
+      <div class="p-card">
+        <div class="p-photo p4 tilt">
+          <span class="p-cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></span>
+        </div>
+        <div class="p-name">Spring Wreath</div>
+        <div class="p-price">$24<span>USD</span></div>
+        <div class="p-rating">★ 4.8 · 203 reviews</div>
+        <button class="p-addbtn">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div>
+        <h2>Build Your Gift Box</h2>
+        <p>A guided, visual way to create something truly personal</p>
+      </div>
+    </div>
+    <div class="builder" data-reveal>
+      <div class="timeline" id="timeline">
+        <div class="t-step active" data-step="0">
+          <div class="t-node-wrap"><div class="t-node">1</div><div class="t-line"></div></div>
+          <div class="t-content"><h4>Choose Box</h4><p>Minimalist, kraft, or luxury velvet — pick a style that fits.</p></div>
+        </div>
+        <div class="t-step" data-step="1">
+          <div class="t-node-wrap"><div class="t-node">2</div><div class="t-line"></div></div>
+          <div class="t-content"><h4>Choose Products</h4><p>Pick from our curated catalog of gifts and decor.</p></div>
+        </div>
+        <div class="t-step" data-step="2">
+          <div class="t-node-wrap"><div class="t-node">3</div><div class="t-line"></div></div>
+          <div class="t-content"><h4>Add a Message</h4><p>Write a personal note — we print it beautifully on cardstock.</p></div>
+        </div>
+        <div class="t-step" data-step="3">
+          <div class="t-node-wrap"><div class="t-node">4</div><div class="t-line"></div></div>
+          <div class="t-content"><h4>Preview</h4><p>See exactly how your finished gift box will look.</p></div>
+        </div>
+        <div class="t-step" data-step="4">
+          <div class="t-node-wrap"><div class="t-node">5</div></div>
+          <div class="t-content"><h4>Order</h4><p>We pack it with care and deliver it on time.</p></div>
+        </div>
+      </div>
+      <div class="builder-visual"><span id="builderVisualText">Step 1 — choosing your box style</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="statement" data-reveal>
+      <h2>A gift isn't a transaction. <span class="accent">It's a feeling.</span><br>We don't sell <span class="accent2">products</span> — we create <span class="accent2">moments</span>.</h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <div>
+        <h2>Loved by our customers</h2>
+        <p>What people say after their first order</p>
+      </div>
+    </div>
+    <div class="testi-grid" data-reveal="stagger">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">"This feels unlike any gift shop I've used before — like Apple met a flower shop. The AI Finder genuinely understood what I needed."</p>
+        <div class="testi-who"><div class="testi-avatar"></div><div><b>Aziza K.</b><span>Tashkent</span></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">"Found the perfect anniversary gift in under two minutes. The gift box builder made it feel so personal."</p>
+        <div class="testi-who"><div class="testi-avatar"></div><div><b>Sardor M.</b><span>Samarkand</span></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">"Delivery was fast and the packaging alone made it feel like a premium experience. Will order again."</p>
+        <div class="testi-who"><div class="testi-avatar"></div><div><b>Malika R.</b><span>Bukhara</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="trust" data-reveal>
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Fast delivery</div>
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1 0 2.6-6.3L3 8"/><path d="M3 3v5h5"/></svg>Free returns</div>
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg>Secure payment</div>
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>24/7 support</div>
+</div></div>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <a class="logo" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7c-1.5-4-6-4-6 0s4.5 4 6 0zM12 7c1.5-4 6-4 6 0s-4.5 4-6 0z"/></svg>
+        Giftlandiya
+      </a>
+      <p class="desc">A discovery and shopping platform for gifts, decor and aesthetic living — built around how people actually feel about giving.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="#">New arrivals</a>
+      <a href="#">Collections</a>
+      <a href="#">Gift box builder</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">Track order</a>
+      <a href="#">Returns</a>
+      <a href="#">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="#">+998 90 123 45 67</a>
+      <a href="#">Telegram</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Giftlandiya. All rights reserved.</span>
+    <span>Concept prototype · For visual review only</span>
+  </div>
+</footer>
+
+<script>
+  // theme toggle
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+  });
+
+  // AI finder chips
+  const chips = document.querySelectorAll('.chip');
+  const result = document.getElementById('finderResult');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      result.classList.add('show');
+    });
+  });
+
+  // scroll reveal
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+
+  // subtle cursor-tilt — no real 3D assets needed
+  document.querySelectorAll('.tilt').forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      el.style.transform = `perspective(700px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
+    });
+    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+  });
+
+  // gift box builder timeline
+  const steps = document.querySelectorAll('.t-step');
+  const visualText = document.getElementById('builderVisualText');
+  const visualCopy = [
+    'Step 1 — choosing your box style',
+    'Step 2 — picking products from the catalog',
+    'Step 3 — writing a personal message',
+    'Step 4 — previewing the finished box',
+    'Step 5 — packed and on its way'
+  ];
+  steps.forEach((step, i) => {
+    step.addEventListener('click', () => {
+      steps.forEach((s, j) => {
+        s.classList.remove('active', 'done');
+        if (j < i) s.classList.add('done');
+        if (j === i) s.classList.add('active');
+      });
+      visualText.textContent = visualCopy[i];
+    });
+  });
+</script>
+
+</body>
+</html>

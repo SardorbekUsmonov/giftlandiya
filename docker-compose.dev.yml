@@ -1,0 +1,57 @@
+version: '3.9'
+
+networks:
+  giftlandiya_dev:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  meili_data:
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: giftlandiya_postgres
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: giftlandiya
+      POSTGRES_USER: giftuser
+      POSTGRES_PASSWORD: giftpass123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - giftlandiya_dev
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U giftuser']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: giftlandiya_redis
+    ports:
+      - '6379:6379'
+    command: redis-server --requirepass giftredis123
+    volumes:
+      - redis_data:/data
+    networks:
+      - giftlandiya_dev
+    restart: unless-stopped
+
+  meilisearch:
+    image: getmeili/meilisearch:latest
+    container_name: giftlandiya_meili
+    ports:
+      - '7700:7700'
+    environment:
+      MEILI_MASTER_KEY: giftmeili123
+      MEILI_ENV: development
+    volumes:
+      - meili_data:/meili_data
+    networks:
+      - giftlandiya_dev
+    restart: unless-stopped

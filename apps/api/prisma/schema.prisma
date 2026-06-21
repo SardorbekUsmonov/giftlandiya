@@ -1,0 +1,295 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [pgvector(map: "vector", schema: "public")]
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  MODERATOR
+  SELLER
+  WAREHOUSE
+  CUSTOMER
+}
+
+enum Segment {
+  NEW
+  ACTIVE
+  VIP
+  SLEEPING
+}
+
+enum OrderStatus {
+  NEW
+  CONFIRMED
+  PACKING
+  READY
+  ON_COURIER
+  DELIVERED
+  RETURNED
+  CANCELLED
+}
+
+enum DeliveryType {
+  COURIER
+  PICKUP
+  SCHEDULED
+  SECRET
+}
+
+enum PaymentProvider {
+  PAYME
+  CLICK
+  UZUM
+  CASH
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum DiscountType {
+  PERCENT
+  FIXED
+}
+
+// ─── Models ──────────────────────────────────────────────────────────────────
+
+model User {
+  id           String    @id @default(cuid())
+  phone        String    @unique
+  email        String?
+  name         String?
+  birthday     DateTime?
+  gender       String?
+  role         Role      @default(CUSTOMER)
+  loyaltyCoins Int       @default(0)
+  ltv          Int       @default(0)
+  segment      Segment   @default(NEW)
+  telegramId   String?
+  referralCode String    @unique @default(cuid())
+  referredById String?
+  passwordHash String?
+  createdAt    DateTime  @default(now())
+
+  orders        Order[]
+  addresses     Address[]
+  reviews       Review[]
+  giftCalendars GiftCalendar[]
+  seller        Seller?
+
+  @@index([phone])
+  @@index([segment])
+}
+
+model Product {
+  id           String  @id @default(cuid())
+  sku          String  @unique
+  barcode      String?
+  nameUz       String
+  nameRu       String
+  descUz       String  @db.Text
+  descRu       String? @db.Text
+  price        Int
+  comparePrice Int?
+  stock        Int     @default(0)
+  reserved     Int     @default(0)
+  images       String[]
+  videoUrl     String?
+  model3dUrl   String?
+  tags         String[]
+  occasions    String[]
+  forWhom      String[]
+  rating       Float   @default(0)
+  reviewCount  Int     @default(0)
+  slug         String  @unique
+  isActive     Boolean @default(true)
+  isFeatured   Boolean @default(false)
+  weight       Float?
+
+  // pgvector embedding — queried via raw SQL only (CLAUDE.md rule 13)
+  embedding Unsupported("vector(1536)")?
+
+  category   Category    @relation(fields: [categoryId], references: [id])
+  categoryId String
+  orderItems OrderItem[]
+  reviews    Review[]
+
+  @@index([categoryId, isActive])
+  @@index([slug])
+  @@index([isActive, isFeatured])
+}
+
+model Category {
+  id        String  @id @default(cuid())
+  nameUz    String
+  nameRu    String
+  slug      String  @unique
+  image     String?
+  parentId  String?
+  sortOrder Int     @default(0)
+
+  parent   Category?  @relation("tree", fields: [parentId], references: [id])
+  children Category[] @relation("tree")
+  products Product[]
+}
+
+model Order {
+  id           String       @id @default(cuid())
+  orderNumber  String       @unique
+  status       OrderStatus  @default(NEW)
+  userId       String
+  sellerId     String?
+  subtotal     Int
+  discount     Int          @default(0)
+  deliveryFee  Int          @default(0)
+  total        Int
+  promoCode    String?
+  coinsUsed    Int          @default(0)
+  address      String
+  district     String?
+  contactName  String
+  contactPhone String
+  isGift       Boolean      @default(false)
+  giftMessage  String?
+  giftWrapping Boolean      @default(false)
+  secretSender Boolean      @default(false)
+  deliveryType DeliveryType @default(COURIER)
+  scheduledAt  DateTime?
+  notes        String?
+  utmSource    String?
+  createdAt    DateTime     @default(now())
+
+  user    User        @relation(fields: [userId], references: [id])
+  seller  Seller?     @relation(fields: [sellerId], references: [id])
+  items   OrderItem[]
+  payment Payment?
+
+  @@index([userId, createdAt])
+  @@index([sellerId, status])
+  @@index([status])
+}
+
+model OrderItem {
+  id          String  @id @default(cuid())
+  orderId     String
+  productId   String
+  qty         Int
+  price       Int
+  giftWrapped Boolean @default(false)
+
+  order   Order   @relation(fields: [orderId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+}
+
+model Payment {
+  id            String          @id @default(cuid())
+  orderId       String          @unique
+  provider      PaymentProvider
+  amount        Int
+  status        PaymentStatus   @default(PENDING)
+  transactionId String?
+  paidAt        DateTime?
+  createdAt     DateTime        @default(now())
+
+  order Order @relation(fields: [orderId], references: [id])
+}
+
+model Seller {
+  id             String  @id @default(cuid())
+  userId         String  @unique
+  shopName       String?
+  description    String?
+  monthlyTarget  Int     @default(0)
+  commissionRate Float   @default(0.1)
+  isActive       Boolean @default(true)
+
+  user   User    @relation(fields: [userId], references: [id])
+  orders Order[]
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  productId  String
+  userId     String
+  rating     Int
+  comment    String?
+  images     String[]
+  isApproved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+
+  @@index([productId, isApproved])
+}
+
+model Address {
+  id        String  @id @default(cuid())
+  userId    String
+  title     String
+  address   String
+  district  String
+  landmark  String?
+  isDefault Boolean @default(false)
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model GiftCalendar {
+  id         String   @id @default(cuid())
+  userId     String
+  personName String
+  eventType  String
+  eventDate  DateTime
+  budget     Int?
+  reminded7d Boolean  @default(false)
+  reminded1d Boolean  @default(false)
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model PromoCode {
+  id            String       @id @default(cuid())
+  code          String       @unique
+  discountType  DiscountType
+  discountValue Int
+  minOrderValue Int          @default(0)
+  maxUses       Int?
+  usedCount     Int          @default(0)
+  expiresAt     DateTime?
+  isActive      Boolean      @default(true)
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  title     String
+  body      String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String
+  action    String
+  entity    String
+  entityId  String
+  oldValue  Json?
+  newValue  Json?
+  ip        String?
+  createdAt DateTime @default(now())
+}

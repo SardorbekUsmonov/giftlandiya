@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "catalog": "Katalog",
+    "giftAdvisor": "AI Sovg'a maslahati",
+    "souvenirs": "Suvenir",
+    "decor": "Dekor",
+    "login": "Kirish",
+    "cart": "Savat",
+    "search": "Qidirish"
+  },
+  "home": {
+    "hero": {
+      "title": "Eng yaxshi sovg'alarni \ntoping",
+      "subtitle": "O'zbekistonning eng katta sovg'a do'konida 10,000+ mahsulot — tug'ilgan kun, to'y, yangi yil va boshqa bayramlar uchun",
+      "ctaBuy": "AI bilan sovg'a toping",
+      "ctaCatalog": "Katalogni ko'rish"
+    },
+    "newProducts": "Yangi keldi",
+    "giftSets": "Sovg'a to'plamlari",
+    "aiBot": {
+      "title": "Giftbot — 30 soniyada sovg'a topib beraman!",
+      "subtitle": "Kim uchun, qanday byudjet — shuni ayting, men tavsiya beraman",
+      "cta": "Boshlash"
+    },
+    "seeAll": "Hammasi →"
+  },
+  "product": {
+    "addToCart": "Savatga",
+    "buyNow": "Sotib olish",
+    "inStock": "Mavjud",
+    "outOfStock": "Tugagan",
+    "reviews": "sharhlar",
+    "description": "Tavsif",
+    "giftWrap": "Sovg'a o'rash",
+    "giftCard": "Sovg'a kartochkasi",
+    "secretSender": "Sirli jo'natuvchi",
+    "relatedProducts": "O'xshash mahsulotlar"
+  },
+  "checkout": {
+    "title": "Buyurtma rasmiylashtirish",
+    "name": "Ism",
+    "phone": "Telefon raqami",
+    "address": "Manzil",
+    "district": "Tuman",
+    "giftSection": "Sovg'a sozlamalari",
+    "paymentMethod": "To'lov usuli",
+    "promoCode": "Promo kod",
+    "total": "Jami",
+    "deliveryFree": "Yetkazib berish bepul",
+    "placeOrder": "Buyurtma berish"
+  },
+  "common": {
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik yuz berdi",
+    "search": "Qidirish",
+    "back": "Orqaga",
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "som": "so'm",
+    "pieces": "dona",
+    "ago": "oldin"
+  },
+  "hero": {
+    "tag": "O'zbekistondagi eng yaxshi sovg'a do'koni",
+    "headline1": "Mukammal sovg'alar.",
+    "headline2": "Go'zal makonlar.",
+    "headline3": "Ma'noli onlar.",
+    "subtitle": "Har bir sovg'a — his-tuyg'u. Qo'lda tanlangan dekor va sovg'a to'plamlari orqali eng yaqin insoningizga maxsus lahza yarating.",
+    "ctaPrimary": "AI bilan sovg'a topish",
+    "ctaSecondary": "Katalogni ko'rish",
+    "statLabel": "mamnun xaridor"
+  },
+  "aiFinder": {
+    "title": "Kim uchun sovg'a tanlaymiz?",
+    "subtitle": "Bir necha savolga javob bering — biz ideal mosini topamiz",
+    "chips": ["Qiz do'st", "Yigit", "Ona", "Ota", "Do'st", "O'qituvchi"],
+    "confirmation": "Ajoyib tanlov! AI Finder'ga o'tamiz →"
+  },
+  "whyBento": {
+    "title": "Nega Giftlandiya",
+    "subtitle": "Shunchaki marketplace emas — sovg'a topish tajribasi",
+    "feature": "AI sizning o'rningizga o'ylaydi",
+    "featureDesc": "Byudjet, kim uchun va vaziyatni ayting — qolganini GiftBot hal qiladi va ideal sovg'ani topadi.",
+    "comingSoon": "Tez orada: o'zingiz sovg'a quticha yarating",
+    "comingSoonDesc": "Mahsulot tanlang, xat yozing, ko'rib chiqing va buyurtma bering",
+    "responseTime": "30 soniya",
+    "aiTime": "AI javob vaqti",
+    "rating": "O'rtacha reyting",
+    "seeAll": "Barchasi"
+  },
+  "giftSets": {
+    "title": "Sovg'a to'plamlari",
+    "subtitle": "Har bir to'plam alohida bir kayfiyat uchun yaratilgan",
+    "viewCollection": "To'plamni ko'rish"
+  },
+  "statement": {
+    "line1": "Sovg'a — oddiy savdo emas.",
+    "emphasis1": "Bu hissiyot.",
+    "line2pre": "Biz",
+    "word1": "mahsulot",
+    "line2mid": "sotmaymiz — biz",
+    "word2": "lahza",
+    "line2post": "yaratamiz."
+  },
+  "testimonials": {
+    "title": "Mijozlarimiz fikri",
+    "subtitle": "Birinchi buyurtmadan keyin odamlar nima deydi",
+    "quote1": "Bu boshqa sovg'a do'konlariga o'xshamaydi — xuddi Apple bilan gulchilik birlashgandek. AI Finder aynan nima kerakligimni tushundi.",
+    "quote2": "Sevgilimga sovg'a 2 daqiqada topildi. Juda shaxsiy va o'ylangan tuyuldi.",
+    "quote3": "Yetkazib berish tez, qadoqlash esa premium tuyg'u berdi. Yana buyurtma beraman."
+  },
+  "trustBar": {
+    "delivery": "Tez yetkazib berish",
+    "returns": "Bepul qaytarish",
+    "payment": "Xavfsiz to'lov",
+    "support": "24/7 yordam"
+  },
+  "footer": {
+    "katalogHeader": "Katalog",
+    "mijozlarHeader": "Mijozlar",
+    "kontaktHeader": "Kontakt",
+    "allProducts": "Barcha mahsulotlar",
+    "giftSets": "Sovg'a to'plamlari",
+    "souvenirs": "Suvenirlar",
+    "homeDecor": "Uy bezaklari",
+    "newArrivals": "Yangi kelganlar",
+    "orderTracking": "Buyurtma kuzatuv",
+    "returnPolicy": "Qaytarish siyosati",
+    "deliveryInfo": "Yetkazib berish",
+    "faq": "Tez-tez so'raladigan savollar",
+    "description": "Sovg'a, dekor va estetik yashash uchun kashfiyot platformasi — odamlarning sovg'a berish haqida his-tuyg'ulariga asoslangan.",
+    "copyright": "© {year} Giftlandiya. Barcha huquqlar himoyalangan.",
+    "privacyPolicy": "Maxfiylik siyosati",
+    "termsOfService": "Foydalanish shartlari"
+  }
+}

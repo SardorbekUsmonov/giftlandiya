@@ -3,9 +3,26 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3002",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3002",
     "lint": "next lint"
+  },
+  "dependencies": {
+    "@giftlandiya/types": "*",
+    "@tailwindcss/postcss": "^4.3.1",
+    "@types/node": "^20.19.43",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "axios": "^1.18.0",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.9",
+    "next": "^15.5.19",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "recharts": "^3.8.1",
+    "tailwindcss": "^4.3.1",
+    "typescript": "^5.9.3",
+    "zustand": "^5.0.14"
   }
 }

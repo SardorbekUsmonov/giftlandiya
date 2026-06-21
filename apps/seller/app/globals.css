@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #7C3AED;
+  --color-brand-light: #A78BFA;
+  --color-brand-hover: #6D28D9;
+  --color-brand-bg: #EDE9FE;
+  --color-brand-text: #5B21B6;
+
+  --color-gold: #F59E0B;
+  --color-gold-hover: #D97706;
+
+  --color-dark-page: #0F1117;
+  --color-dark-card: #181C25;
+  --color-dark-elevated: #1E2433;
+  --color-dark-border: #2A3040;
+
+  --color-success: #10B981;
+  --color-error: #EF4444;
+  --color-warning: #F59E0B;
+  --color-info: #3B82F6;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: #0F1117;
+  color: #F8FAFC;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overscroll-behavior: none;
+}
+
+/* Safe area padding for notched phones */
+.pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+.pt-safe {
+  padding-top: max(0px, env(safe-area-inset-top));
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

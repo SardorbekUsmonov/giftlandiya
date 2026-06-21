@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand */
+  --color-brand: #7C3AED;
+  --color-brand-light: #A78BFA;
+  --color-brand-hover: #6D28D9;
+  --color-brand-bg: #EDE9FE;
+  --color-brand-text: #5B21B6;
+
+  /* Gold / CTA */
+  --color-gold: #F59E0B;
+  --color-gold-hover: #D97706;
+  --color-gold-bg: #FEF3C7;
+  --color-gold-dark: #FBBF24;
+
+  /* Semantic */
+  --color-success: #10B981;
+  --color-error: #EF4444;
+  --color-warning: #F59E0B;
+  --color-info: #3B82F6;
+
+  /* Dark mode backgrounds */
+  --color-dark-page: #0F1117;
+  --color-dark-card: #181C25;
+  --color-dark-elevated: #1E2433;
+  --color-dark-border: #2A3040;
+
+  /* Typography scale — Geist loaded via next/font, falls back to system */
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Hero gradient utility */
+.hero-gradient {
+  background: linear-gradient(135deg, #7C3AED 0%, #A855F7 50%, #C084FC 100%);
+}
+
+/* Line-clamp utilities */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Smooth scroll for chip containers */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Confetti animation for checkout success */
+@keyframes confetti-fall {
+  0%   { transform: translateY(-20px) rotate(0deg);   opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
