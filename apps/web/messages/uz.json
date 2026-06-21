@@ -6,7 +6,8 @@
     "decor": "Dekor",
     "login": "Kirish",
     "cart": "Savat",
-    "search": "Qidirish"
+    "search": "Qidirish",
+    "searchPlaceholder": "Sovg'a, g'oya yoki ilhom izlang..."
   },
   "home": {
     "hero": {

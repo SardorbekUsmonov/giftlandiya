@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, type FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Gift, Search, Heart, ShoppingCart, User, ChevronDown } from 'lucide-react';
 import { useCartStore } from '@/stores/cart';
 import { routing } from '@/i18n/routing';
@@ -18,6 +18,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const locale = useLocale();
+  const t = useTranslations('nav');
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [localeMenuOpen, setLocaleMenuOpen] = useState(false);
   const [query, setQuery] = useState('');
@@ -79,7 +80,7 @@ export default function Navbar() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               type="search"
-              placeholder="Sovg'a, g'oya yoki ilhom izlang..."
+              placeholder={t('searchPlaceholder')}
               className="w-full rounded-full border border-[#E9E9EC] bg-white py-[11px] pl-10 pr-4 text-[13.5px] text-gray-900 outline-none transition-shadow placeholder:text-[#9CA3AF] focus:border-[#7C3AED] focus:ring-[3px] focus:ring-[#7C3AED]/[0.16]"
             />
           </form>
@@ -153,7 +154,7 @@ export default function Navbar() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               type="search"
-              placeholder="Sovg'a, g'oya yoki ilhom izlang..."
+              placeholder={t('searchPlaceholder')}
               className="w-full rounded-full border border-[#E9E9EC] bg-white py-[11px] pl-10 pr-4 text-[13.5px] text-gray-900 outline-none placeholder:text-[#9CA3AF] focus:border-[#7C3AED]"
             />
           </form>
