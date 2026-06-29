@@ -10,7 +10,8 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
-    "test": "jest"
+    "test": "jest",
+    "create-admin": "ts-node scripts/create-admin.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.104.2",

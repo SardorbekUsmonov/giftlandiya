@@ -47,7 +47,7 @@ function useTime() {
 
 export default function HomePage() {
   const auth = typeof window !== 'undefined' ? getAuth() : null;
-  const sellerName = auth?.seller?.user?.name ?? auth?.seller?.shopName ?? 'Sotuvchi';
+  const sellerName = auth?.seller?.name ?? 'Sotuvchi';
   const time = useTime();
   const [data, setData] = useState<HomeData | null>(null);
   const [loading, setLoading] = useState(true);

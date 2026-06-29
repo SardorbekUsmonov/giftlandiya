@@ -1,7 +1,8 @@
 export interface SellerUser {
   id: string;
-  shopName?: string;
-  user?: { name?: string; phone: string };
+  phone: string;
+  name?: string;
+  role: string;
 }
 
 export function getAuth(): { accessToken: string; seller: SellerUser } | null {
